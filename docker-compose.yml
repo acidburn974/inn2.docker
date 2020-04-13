@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  inn:
+    build:
+      context: '.'
+      dockerfile: Dockerfile
+    hostname: 'myhostname.com'
+    extra_hosts: 
+      - "news.myhostname.com:127.0.0.1"
+      - "news.myhostname.com:::1"
+    ports:
+      - 119:119
+    volumes: 
+      - "./config:/etc/news"
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
